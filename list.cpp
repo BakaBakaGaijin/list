@@ -1,4 +1,12 @@
+/*
+    Создать линейный односвязный список. Из списка удалить последнюю пару
+    соседних элементов, модуль разности между которыми превышает заданную
+    величину, а затем элементы списка расположить в порядке возрастания и
+    вставить заданное число, не нарушая порядка расположения. Освободить
+    память, занимаемую элементами списка
+ */
 #include <iostream>
+#include <math.h>
 
 using namespace std;
 
@@ -10,20 +18,24 @@ int Del(int);
 bool Empty();
 void DelAll();
 
+//void reverse(struct LIST ** head);
+
 struct LIST {
     int info;
     LIST* next;
 };
 
-LIST* head, * Prey;
-
+LIST* head, * Prey; // *tmp1, *tmp2;
+void reverse(LIST *&head);
 
 int main() {
     Initial();
+
     int num, point;
     char option;
+
     do {
-        cout << endl << "1.Adding" << endl << "2.Remove" << endl << "3.List output" << endl << "0.Exit" << endl;
+        cout << endl << "1.Adding" << endl << "2.Remove" << endl << "3.List output" << endl << "4.Task" << endl << "0.Exit" << endl;
         cin >> option;
         switch (option) {
 
@@ -67,6 +79,14 @@ int main() {
                 else
                     Show();
                 break;
+            case '4':
+                if (Empty())
+                    cout << endl << "The list is empty" << endl;
+                else {
+                    cout << endl << "Expand the list" << endl;
+                    reverse(head);
+                }
+                break;
             case '0':
                 DelAll();
                 break;
@@ -78,6 +98,31 @@ int main() {
     } while (option != '0');
     cin.get();
 }
+
+//LIST* SearchTask(int num) {
+//    if (tmp2 != 0) {
+//        tmp1 = tmp2;
+//        tmp2 = tmp2->next;
+//
+//        SearchTask(num);
+//    } else {
+//        if (abs(tmp1->info - tmp2->info) > num) {
+//            return tmp1;
+//        }
+//    }
+//}
+
+//LIST* SearchTask(int num) {
+//    LIST *tmp1 = head;
+//    LIST *tmp2 = head->next;
+//
+//
+//    while (tmp2 != NULL) {
+//        tmp1 = tmp2;
+//        tmp2 = tmp2->next;
+//    }
+//
+//}
 
 LIST* Search(int num) {
     Prey = head;
@@ -175,3 +220,44 @@ int AddBefore(int num, int point) {
 
     return 0;
 }
+
+void reverse(LIST *&head) {
+    LIST *new_head = NULL;
+
+    for (LIST *pos = head->next; pos; ) {
+        LIST *save_next = pos->next;
+        pos->next = new_head;
+        new_head = pos;
+        pos = save_next;
+    }
+
+    head->next = new_head;
+}
+
+//void reverse(struct LIST **head) { // разобраться
+//    if (*head == NULL) return;
+//
+//    struct LIST *curr, *next, *prev = NULL;
+//    curr = *head;
+//
+//    while(curr) {
+//        next = curr->next;
+//        curr->next = prev;
+//        prev = curr;
+//        curr = next;
+//    }
+//
+//    *head = prev;
+//}
+
+//LIST *reverse_list(LIST *list) {
+//    LIST *reversed_list = NULL;
+//
+//    for (LIST *node = list, *next_node; node != NULL; node = next_node) {
+//        next_node = node->next;
+//        node->next = reversed_list;
+//        reversed_list = node;
+//    }
+//
+//    return reversed_list;
+//}
