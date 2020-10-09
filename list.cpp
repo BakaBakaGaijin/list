@@ -18,14 +18,13 @@ int Del(int);
 bool Empty();
 void DelAll();
 
-//void reverse(struct LIST ** head);
-
 struct LIST {
     int info;
     LIST* next;
 };
 
-LIST* head, * Prey; // *tmp1, *tmp2;
+LIST* head, * Prey; 
+
 void reverse(LIST *&head);
 
 int main() {
@@ -98,31 +97,6 @@ int main() {
     } while (option != '0');
     cin.get();
 }
-
-//LIST* SearchTask(int num) {
-//    if (tmp2 != 0) {
-//        tmp1 = tmp2;
-//        tmp2 = tmp2->next;
-//
-//        SearchTask(num);
-//    } else {
-//        if (abs(tmp1->info - tmp2->info) > num) {
-//            return tmp1;
-//        }
-//    }
-//}
-
-//LIST* SearchTask(int num) {
-//    LIST *tmp1 = head;
-//    LIST *tmp2 = head->next;
-//
-//
-//    while (tmp2 != NULL) {
-//        tmp1 = tmp2;
-//        tmp2 = tmp2->next;
-//    }
-//
-//}
 
 LIST* Search(int num) {
     Prey = head;
@@ -233,31 +207,3 @@ void reverse(LIST *&head) {
 
     head->next = new_head;
 }
-
-//void reverse(struct LIST **head) { // разобраться
-//    if (*head == NULL) return;
-//
-//    struct LIST *curr, *next, *prev = NULL;
-//    curr = *head;
-//
-//    while(curr) {
-//        next = curr->next;
-//        curr->next = prev;
-//        prev = curr;
-//        curr = next;
-//    }
-//
-//    *head = prev;
-//}
-
-//LIST *reverse_list(LIST *list) {
-//    LIST *reversed_list = NULL;
-//
-//    for (LIST *node = list, *next_node; node != NULL; node = next_node) {
-//        next_node = node->next;
-//        node->next = reversed_list;
-//        reversed_list = node;
-//    }
-//
-//    return reversed_list;
-//}
